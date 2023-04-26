@@ -27,7 +27,7 @@ for k=1:n-1
     Pk{k} = eye(n);
     Pk{k}([k,p],:) = Pk{k}([p,k],:);
     Mk{k} = eye(n);
-    Mk{k}(k+1:n,k) = L(k+1:n,k);
+    Mk{k}(k+1:n,k) = -L(k+1:n,k);
     
 end
 
@@ -50,24 +50,20 @@ for i=1:n
     end
 end
 
-% imprime as matrizes
-disp("A_inv =");
-disp(num2str(A_inv, '%.6f\t'));
-disp("L =");
-disp(num2str(L, '%.6f\t'));
-disp("U =");
-disp(num2str(U, '%.6f\t'));
-disp("P =");
-disp(num2str(P, '%.6f\t'));
-
-% imprime as matrizes de permutação e de eliminação
-for k=1:n-1
-    fprintf("P(%d) =\n", k);
-    disp(num2str(Pk{k}, '%.0f\t'));
+fprintf("inv(A) =\n");
+disp(A_inv);
+fprintf("L =\n");
+disp(L);
+fprintf("U =\n");
+disp(U);
+fprintf("P =\n");
+disp(P);
+% Note que Pk e Mk tem dimensões nxnxk, sendo k a quantidade de matrizes
+for k=1:size(A,1)-1
+  fprintf("P%d =\n",k);
+  disp(Pk{k}); % Pk deve conter todas as matrizes de permutação
 end
-
-for k=1:n-1
-    fprintf("M(%d) =\n", k);
-    disp(num2str(Mk{k}, '%.6f\t'));
+for k=1:size(A,1)-1
+  fprintf("M%d =\n",k);
+  disp(Mk{k}); % Mk deve conter todas as matrizes de eliminação
 end
-
