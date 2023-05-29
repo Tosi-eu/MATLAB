@@ -1,4 +1,4 @@
-function [LU,P] = LUPivo(A)
+function [LU,P] = LU_e_permuta(A)
   
 %----------------------------------
 %
